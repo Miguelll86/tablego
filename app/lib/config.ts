@@ -1,7 +1,7 @@
 // Configurazione per le informazioni di contatto
 export const CONTACT_CONFIG = {
-  // Sostituisci con il tuo numero di telefono reale (formato internazionale)
-  phoneNumber: '393123456789', // Esempio: '393123456789' per +39 312 345 6789
+  // Numero di telefono configurato (formato internazionale)
+  phoneNumber: '393931441705', // +39 393 144 1705
   
   // Email di contatto
   email: 'info@tablo.com',
