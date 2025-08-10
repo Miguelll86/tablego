@@ -72,6 +72,9 @@ export default function HomePage() {
             <Link href="/pricing" className="text-white/80 hover:text-white transition-colors">
               {t('landing.pricing') || 'Prezzi'}
             </Link>
+            <Link href="/ai-features" className="text-white/80 hover:text-white transition-colors">
+              🤖 AI Features
+            </Link>
             {!isAuthenticated ? (
               <>
                 <Link href="/register" className="text-white/80 hover:text-white transition-colors">
