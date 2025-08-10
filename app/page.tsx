@@ -262,12 +262,9 @@ export default function HomePage() {
       <section className="relative z-10 px-4 py-16">
         <div className="max-w-4xl mx-auto">
           <div className="bg-white/5 backdrop-blur-md rounded-2xl p-8 border border-white/10 text-center">
-            <h2 className="text-4xl md:text-5xl font-bold text-white mb-4 drop-shadow-lg">
-              E' tutto nuovo...e trasparente
+            <h2 className="text-6xl md:text-7xl font-bold text-white mb-4 drop-shadow-lg">
+              È tutto nuovo...e trasparente
             </h2>
-            <p className="text-gray-300 text-lg leading-relaxed max-w-3xl mx-auto">
-              Non troverai ancora recensioni. Te lo dico chiaramente: la piattaforma funziona e riceverai supporto diretto.
-            </p>
             <div className="mt-6 text-gray-400 text-sm">
               La scelta più semplice: prova subito, senza rischi, e valuta tu stesso.
             </div>
