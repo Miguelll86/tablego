@@ -99,8 +99,8 @@ export default function HomePage() {
         <div className="max-w-4xl mx-auto">
           <div className={`transition-all duration-1000 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}>
             
-            <h1 className="text-10xl md:text-16xl font-black text-white mb-8 leading-tight tracking-wide drop-shadow-2xl">
-              {t('landing.heroTitle')}
+            <h1 className="text-12xl md:text-18xl font-black text-white mb-8 leading-tight tracking-wide drop-shadow-2xl">
+              Gestisci il tuo locale in modo semplice e intelligente
             </h1>
             
             <p className="text-2xl md:text-4xl text-white mb-12 max-w-4xl mx-auto leading-relaxed font-light drop-shadow-lg">
