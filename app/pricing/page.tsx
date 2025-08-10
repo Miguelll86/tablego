@@ -87,12 +87,12 @@ export default function Pricing() {
             </div>
 
             <div className="space-y-3">
-              <a 
-                href="mailto:info@tablo.com?subject=Acquisto Tablo Pro - 79€&body=Ciao, vorrei acquistare Tablo Pro per il mio ristorante. Attendo vostre indicazioni per il pagamento." 
+              <Link 
+                href="/checkout"
                 className="block w-full bg-gradient-to-r from-orange-500 to-red-500 text-white py-4 px-8 rounded-2xl font-bold text-lg hover:from-orange-600 hover:to-red-600 transition-all transform hover:scale-105 shadow-lg text-center"
               >
                 💳 Acquista Ora - 79€
-              </a>
+              </Link>
               <a 
                 href={getWhatsAppUrl("Ciao! Vorrei informazioni su Tablo Pro (79€) per il mio locale.")}
                 target="_blank"

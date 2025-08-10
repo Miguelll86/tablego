@@ -318,10 +318,10 @@ export default function HomePage() {
             
             <div className="flex justify-center">
               {!isAuthenticated ? (
-                <Link href="/demo-request" className="group relative inline-block">
+                <Link href="/checkout" className="group relative inline-block">
                   <div className="absolute inset-0 bg-gradient-to-r from-orange-600 to-red-600 rounded-xl blur-lg group-hover:blur-xl transition-all duration-300 opacity-75"></div>
                   <div className="relative bg-gradient-to-r from-orange-600 to-red-600 text-white px-8 py-4 rounded-xl font-bold text-lg hover:from-orange-700 hover:to-red-700 transform hover:scale-105 transition-all duration-300 shadow-xl">
-                    {t('landing.tryFree')} 7 Giorni
+                    💳 Acquista Ora - 79€
                   </div>
                 </Link>
               ) : (
