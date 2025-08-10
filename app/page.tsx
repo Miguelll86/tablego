@@ -95,11 +95,11 @@ export default function HomePage() {
       </header>
 
       {/* Hero Section - Design Minimale */}
-      <section className="relative z-10 px-4 py-20 text-center">
+      <section className="relative z-10 px-4 py-12 text-center">
         <div className="max-w-4xl mx-auto">
           <div className={`transition-all duration-1000 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}>
             
-            <h1 className="text-12xl md:text-18xl font-black text-white mb-8 leading-tight tracking-wide drop-shadow-2xl">
+            <h1 className="text-12xl md:text-18xl font-black text-white mb-6 leading-tight tracking-wide drop-shadow-2xl">
               Gestisci il tuo locale in modo semplice e intelligente
             </h1>
             
