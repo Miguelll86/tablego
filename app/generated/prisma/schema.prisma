@@ -1,0 +1,334 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+
+generator client {
+  provider = "prisma-client-js"
+  output   = "../app/generated/prisma"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id          String   @id @default(cuid())
+  email       String   @unique
+  password    String
+  name        String
+  role        UserRole @default(RESTAURANT_OWNER)
+  demoAccount Boolean  @default(false)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  // Relazioni
+  restaurants Restaurant[]
+  orders      Order[]
+
+  @@map("users")
+}
+
+model Restaurant {
+  id          String    @id @default(cuid())
+  name        String
+  description String?
+  address     String
+  phone       String
+  email       String
+  logo        String?
+  isActive    Boolean   @default(true)
+  demoAccount Boolean   @default(false)
+  demoExpiry  DateTime?
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime  @updatedAt
+
+  // Fatturazione
+  piva          String? // Partita IVA
+  codiceUnivoco String? // Codice univoco per fatturazione
+
+  // Configurazione Stripe
+  stripePublishableKey String?
+  stripeSecretKey      String?
+  stripeWebhookSecret  String?
+
+  // Relazioni
+  userId       String
+  user         User          @relation(fields: [userId], references: [id], onDelete: Cascade)
+  categories   Category[]
+  tables       Table[]
+  orders       Order[]
+  promotions   Promotion[]
+  reservations Reservation[]
+  purchases    Purchase[]
+
+  @@map("restaurants")
+}
+
+model Category {
+  id           String   @id @default(cuid())
+  name         String
+  description  String?
+  image        String?
+  isActive     Boolean  @default(true)
+  displayOrder Int      @default(0)
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+
+  // Relazioni
+  restaurantId String
+  restaurant   Restaurant @relation(fields: [restaurantId], references: [id], onDelete: Cascade)
+  items        MenuItem[]
+
+  @@map("categories")
+}
+
+model MenuItem {
+  id           String   @id @default(cuid())
+  name         String
+  description  String?
+  price        Float
+  image        String?
+  isAvailable  Boolean  @default(true)
+  isVegetarian Boolean  @default(false)
+  isGlutenFree Boolean  @default(false)
+  allergens    String?
+  displayOrder Int      @default(0)
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+
+  // Relazioni
+  categoryId String
+  category   Category    @relation(fields: [categoryId], references: [id], onDelete: Cascade)
+  orderItems OrderItem[]
+
+  @@map("menu_items")
+}
+
+model Table {
+  id       String      @id @default(cuid())
+  number   Int
+  capacity Int
+  position String? // "interno", "terrazza", etc.
+  type     TableType   @default(TABLE)
+  qrCode   String? // URL del QR code
+  isActive Boolean     @default(true)
+  status   TableStatus @default(AVAILABLE)
+
+  // Proprietà per la piantina del locale
+  x      Float? // Posizione X nella piantina (percentuale)
+  y      Float? // Posizione Y nella piantina (percentuale)
+  width  Float? // Larghezza del tavolo nella piantina
+  height Float? // Altezza del tavolo nella piantina
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  // Relazioni
+  restaurantId String
+  restaurant   Restaurant    @relation(fields: [restaurantId], references: [id], onDelete: Cascade)
+  orders       Order[]
+  reservations Reservation[]
+
+  @@map("tables")
+}
+
+model Order {
+  id            String      @id @default(cuid())
+  orderNumber   String      @unique
+  type          OrderType
+  status        OrderStatus @default(PENDING)
+  totalAmount   Float
+  notes         String?
+  customerName  String?
+  customerPhone String?
+  createdAt     DateTime    @default(now())
+  updatedAt     DateTime    @updatedAt
+
+  // Relazioni
+  restaurantId String
+  restaurant   Restaurant  @relation(fields: [restaurantId], references: [id], onDelete: Cascade)
+  tableId      String?
+  table        Table?      @relation(fields: [tableId], references: [id])
+  userId       String?
+  user         User?       @relation(fields: [userId], references: [id])
+  items        OrderItem[]
+  payments     Payment[]
+  promotions   Promotion[]
+
+  @@map("orders")
+}
+
+model OrderItem {
+  id       String  @id @default(cuid())
+  quantity Int
+  price    Float
+  notes    String?
+
+  // Relazioni
+  orderId    String
+  order      Order    @relation(fields: [orderId], references: [id], onDelete: Cascade)
+  menuItemId String
+  menuItem   MenuItem @relation(fields: [menuItemId], references: [id])
+
+  @@map("order_items")
+}
+
+model Payment {
+  id            String        @id @default(cuid())
+  amount        Float
+  method        PaymentMethod
+  status        PaymentStatus @default(PENDING)
+  transactionId String?
+  notes         String?
+  createdAt     DateTime      @default(now())
+  updatedAt     DateTime      @updatedAt
+
+  // Relazioni
+  orderId String
+  order   Order  @relation(fields: [orderId], references: [id], onDelete: Cascade)
+
+  @@map("payments")
+}
+
+model Promotion {
+  id          String        @id @default(cuid())
+  name        String
+  description String?
+  code        String        @unique
+  type        PromotionType
+  value       Float // Percentuale o importo fisso
+  minAmount   Float? // Importo minimo per applicare la promozione
+  maxDiscount Float? // Sconto massimo applicabile
+  startDate   DateTime
+  endDate     DateTime
+  isActive    Boolean       @default(true)
+  usageLimit  Int? // Limite di utilizzi totali
+  usedCount   Int           @default(0)
+  createdAt   DateTime      @default(now())
+  updatedAt   DateTime      @updatedAt
+
+  // Relazioni
+  restaurantId String
+  restaurant   Restaurant @relation(fields: [restaurantId], references: [id], onDelete: Cascade)
+  orders       Order[]
+
+  @@map("promotions")
+}
+
+model Reservation {
+  id            String            @id @default(cuid())
+  customerName  String
+  customerEmail String
+  customerPhone String
+  date          DateTime
+  startTime     String // Formato "HH:MM"
+  endTime       String // Formato "HH:MM"
+  guests        Int
+  status        ReservationStatus @default(PENDING)
+  notes         String?
+  createdAt     DateTime          @default(now())
+  updatedAt     DateTime          @updatedAt
+
+  // Relazioni
+  tableId      String
+  table        Table      @relation(fields: [tableId], references: [id], onDelete: Cascade)
+  restaurantId String
+  restaurant   Restaurant @relation(fields: [restaurantId], references: [id], onDelete: Cascade)
+
+  @@map("reservations")
+}
+
+model Purchase {
+  id              String         @id @default(cuid())
+  type            PurchaseType
+  amount          Float
+  status          PurchaseStatus @default(COMPLETED)
+  purchaseDate    DateTime       @default(now())
+  supportExpiry   DateTime? // Per il supporto annuale
+  stripePaymentId String?
+  createdAt       DateTime       @default(now())
+  updatedAt       DateTime       @updatedAt
+
+  // Relazioni
+  restaurantId String
+  restaurant   Restaurant @relation(fields: [restaurantId], references: [id], onDelete: Cascade)
+
+  @@map("purchases")
+}
+
+// Enums
+enum UserRole {
+  ADMIN
+  RESTAURANT_OWNER
+  STAFF
+}
+
+enum TableStatus {
+  AVAILABLE
+  OCCUPIED
+  RESERVED
+  MAINTENANCE
+}
+
+enum TableType {
+  TABLE
+  UMBRELLA
+}
+
+enum OrderType {
+  DINE_IN
+  TAKEAWAY
+  DELIVERY
+}
+
+enum OrderStatus {
+  PENDING
+  CONFIRMED
+  PREPARING
+  READY
+  SERVED
+  COMPLETED
+  CANCELLED
+}
+
+enum PaymentMethod {
+  CASH
+  CARD
+  MOBILE_PAYMENT
+  SPLIT
+}
+
+enum PaymentStatus {
+  PENDING
+  COMPLETED
+  FAILED
+  REFUNDED
+}
+
+enum PromotionType {
+  PERCENTAGE
+  FIXED_AMOUNT
+  FREE_DELIVERY
+  BUY_ONE_GET_ONE
+}
+
+enum ReservationStatus {
+  PENDING
+  CONFIRMED
+  CANCELLED
+}
+
+enum PurchaseType {
+  ONE_TIME // Acquisto principale 79€
+  SUPPORT // Supporto annuale 39€
+}
+
+enum PurchaseStatus {
+  COMPLETED
+  PENDING
+  FAILED
+  REFUNDED
+}

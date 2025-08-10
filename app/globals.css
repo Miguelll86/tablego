@@ -1,0 +1,572 @@
+@import "tailwindcss";
+
+/* FORZA TEMA SCURO - IGNORA COMPLETAMENTE PREFERENZE SISTEMA */
+:root {
+  /* Colori base */
+  --color-primary: #3B82F6;
+  --color-secondary: #8B5CF6;
+  --color-accent: #F59E0B;
+  --color-success: #10B981;
+  --color-warning: #F59E0B;
+  --color-error: #EF4444;
+  --color-info: #3b82f6;
+  
+  /* Colori aggiuntivi per piantina */
+  --color-cyan: #06b6d4;
+  --color-brown: #a16207;
+  --color-yellow-light: #fbbf24;
+  
+  /* Colori di sfondo - FORZATI AL TEMA SCURO */
+  --background: #0f172a !important;
+  --background-card: #1e293b !important;
+  --background-dark: #1e293b !important;
+  --background-card-dark: #334155 !important;
+  
+  /* Colori testo - FORZATI AL TEMA SCURO */
+  --foreground: #f1f5f9 !important;
+  --foreground-muted: #94a3b8 !important;
+  --foreground-dark: #f1f5f9 !important;
+  --foreground-muted-dark: #94a3b8 !important;
+  
+  /* Colori di stato */
+  --success: var(--color-success);
+  --warning: var(--color-warning);
+  --error: var(--color-error);
+  --info: var(--color-info);
+  
+  /* Gradienti */
+  --gradient-primary: linear-gradient(135deg, var(--color-primary) 0%, var(--color-secondary) 100%);
+  --gradient-secondary: linear-gradient(135deg, var(--color-accent) 0%, #f59e0b 100%);
+  --gradient-card: linear-gradient(135deg, var(--background-card) 0%, var(--background) 100%);
+  --gradient-card-dark: linear-gradient(135deg, #334155 0%, #1e293b 100%);
+  
+  /* Ombre */
+  --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.05);
+  --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+  --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
+  --shadow-xl: 0 20px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.1);
+  --shadow-primary: 0 4px 14px 0 rgb(99 102 241 / 0.3);
+  --shadow-secondary: 0 4px 14px 0 rgb(249 115 22 / 0.3);
+  
+  /* Border radius */
+  --border-radius: 12px;
+}
+
+/* FORZA TEMA SCURO - IGNORA PREFERENZE SISTEMA */
+html {
+  color-scheme: dark !important;
+  background-color: #0f172a !important;
+  color: #f1f5f9 !important;
+}
+
+html.dark {
+  color-scheme: dark !important;
+  background-color: #0f172a !important;
+  color: #f1f5f9 !important;
+}
+
+html.dark * {
+  color-scheme: dark !important;
+}
+
+body {
+  background: #0f172a !important;
+  color: #f1f5f9 !important;
+  font-family: 'Montserrat', system-ui, sans-serif;
+  line-height: 1.6;
+  margin: 0;
+  padding: 0;
+  font-display: swap;
+}
+
+/* Override per forzare tema scuro - IGNORA TUTTO */
+@media (prefers-color-scheme: light) {
+  :root {
+    --background: #0f172a !important;
+    --background-card: #1e293b !important;
+    --foreground: #f1f5f9 !important;
+    --foreground-muted: #94a3b8 !important;
+  }
+  
+  html {
+    color-scheme: dark !important;
+    background-color: #0f172a !important;
+    color: #f1f5f9 !important;
+  }
+  
+  body {
+    background: #0f172a !important;
+    color: #f1f5f9 !important;
+  }
+  
+  * {
+    color-scheme: dark !important;
+  }
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --background: #0f172a !important;
+    --background-card: #1e293b !important;
+    --foreground: #f1f5f9 !important;
+    --foreground-muted: #94a3b8 !important;
+  }
+  
+  html {
+    color-scheme: dark !important;
+    background-color: #0f172a !important;
+    color: #f1f5f9 !important;
+  }
+  
+  body {
+    background: #0f172a !important;
+    color: #f1f5f9 !important;
+  }
+}
+
+/* Forza tutti gli elementi a usare il tema scuro */
+* {
+  color-scheme: dark !important;
+}
+
+/* Override specifici per elementi comuni */
+.text-gray-900,
+.text-gray-800,
+.text-gray-700,
+.text-gray-600,
+.text-gray-500,
+.text-gray-400,
+.text-gray-300,
+.text-gray-200,
+.text-gray-100 {
+  color: #f1f5f9 !important;
+}
+
+.bg-gray-50,
+.bg-gray-100,
+.bg-gray-200,
+.bg-gray-300,
+.bg-gray-400,
+.bg-gray-500,
+.bg-gray-600,
+.bg-gray-700,
+.bg-gray-800,
+.bg-gray-900 {
+  background-color: #0f172a !important;
+}
+
+.bg-white {
+  background-color: #1e293b !important;
+}
+
+.text-black {
+  color: #f1f5f9 !important;
+}
+
+.text-white {
+  color: #f1f5f9 !important;
+}
+
+/* Override aggiuntivi per elementi specifici */
+[class*="text-gray"] {
+  color: #f1f5f9 !important;
+}
+
+[class*="bg-gray"] {
+  background-color: #0f172a !important;
+}
+
+[class*="bg-white"] {
+  background-color: #1e293b !important;
+}
+
+/* Forza il tema scuro su tutti i componenti */
+.dark * {
+  color-scheme: dark !important;
+}
+
+/* Override per elementi che potrebbero non essere coperti */
+.text-slate-900,
+.text-slate-800,
+.text-slate-700,
+.text-slate-600,
+.text-slate-500,
+.text-slate-400,
+.text-slate-300,
+.text-slate-200,
+.text-slate-100 {
+  color: #f1f5f9 !important;
+}
+
+.bg-slate-50,
+.bg-slate-100,
+.bg-slate-200,
+.bg-slate-300,
+.bg-slate-400,
+.bg-slate-500,
+.bg-slate-600,
+.bg-slate-700,
+.bg-slate-800,
+.bg-slate-900 {
+  background-color: #0f172a !important;
+}
+
+/* Stili per i componenti principali */
+.btn-primary {
+  background: var(--gradient-primary);
+  color: white;
+  border: none;
+  padding: 12px 24px;
+  border-radius: var(--border-radius);
+  font-weight: 600;
+  font-size: 14px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: var(--shadow-primary);
+}
+
+.btn-primary:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-lg);
+}
+
+.btn-secondary {
+  background: var(--gradient-secondary);
+  color: white;
+  border: none;
+  padding: 12px 24px;
+  border-radius: var(--border-radius);
+  font-weight: 600;
+  font-size: 14px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: var(--shadow-secondary);
+}
+
+.btn-secondary:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-lg);
+}
+
+.card {
+  background: var(--gradient-card);
+  border-radius: 16px;
+  padding: 24px;
+  box-shadow: var(--shadow-md);
+  border: 1px solid #E2E8F0;
+  transition: all 0.3s ease;
+}
+
+.card:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-xl);
+}
+
+.card-dark {
+  background: var(--gradient-card-dark);
+  border-radius: 16px;
+  padding: 24px;
+  box-shadow: var(--shadow-md);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  transition: all 0.3s ease;
+}
+
+.card-dark:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-xl);
+}
+
+/* Stili per input e form */
+.input {
+  background: var(--background-card);
+  border: 2px solid #E2E8F0;
+  border-radius: var(--border-radius);
+  padding: 12px 16px;
+  font-size: 14px;
+  transition: all 0.3s ease;
+  width: 100%;
+  color: var(--foreground);
+}
+
+.input:focus {
+  outline: none;
+  border-color: var(--color-primary);
+  box-shadow: 0 0 0 3px rgb(99 102 241 / 0.1);
+}
+
+/* Stili per la navbar */
+.navbar {
+  background: rgba(255, 255, 255, 0.9);
+  backdrop-filter: blur(20px);
+  border-bottom: 1px solid #E2E8F0;
+  box-shadow: var(--shadow-sm);
+}
+
+.navbar-dark {
+  background: rgba(15, 23, 42, 0.9);
+  backdrop-filter: blur(20px);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+  box-shadow: var(--shadow-sm);
+}
+
+/* Stili per i badge e stati */
+.badge-success {
+  background: var(--color-success);
+  color: white;
+  padding: 4px 12px;
+  border-radius: 20px;
+  font-size: 12px;
+  font-weight: 600;
+}
+
+.badge-warning {
+  background: var(--color-warning);
+  color: white;
+  padding: 4px 12px;
+  border-radius: 20px;
+  font-size: 12px;
+  font-weight: 600;
+}
+
+.badge-error {
+  background: var(--color-error);
+  color: white;
+  padding: 4px 12px;
+  border-radius: 20px;
+  font-size: 12px;
+  font-weight: 600;
+}
+
+.badge-info {
+  background: var(--color-info);
+  color: white;
+  padding: 4px 12px;
+  border-radius: 20px;
+  font-size: 12px;
+  font-weight: 600;
+}
+
+/* Stili per i titoli - Stile Desigual */
+h1, h2, h3, h4, h5, h6 {
+  color: var(--foreground);
+  font-weight: 700;
+  line-height: 1.2;
+  letter-spacing: 0.02em;
+}
+
+h1 {
+  font-size: 2.5rem;
+  font-weight: 900;
+  letter-spacing: 0.05em;
+}
+
+h2 {
+  font-size: 2rem;
+  font-weight: 800;
+  letter-spacing: 0.03em;
+}
+
+h3 {
+  font-size: 1.5rem;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+}
+
+h4 {
+  font-size: 1.25rem;
+  font-weight: 700;
+}
+
+/* Animazioni */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes slideIn {
+  from {
+    transform: translateX(-100%);
+  }
+  to {
+    transform: translateX(0);
+  }
+}
+
+@keyframes pulse {
+  0%, 100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.5;
+  }
+}
+
+.fade-in {
+  animation: fadeIn 0.5s ease-out;
+}
+
+.slide-in {
+  animation: slideIn 0.3s ease-out;
+}
+
+.pulse {
+  animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+}
+
+/* Scrollbar personalizzata */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: #f1f1f1;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #c1c1c1;
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #a8a8a8;
+}
+
+/* Dark mode */
+@media (prefers-color-scheme: dark) {
+  .card {
+    background: var(--gradient-card-dark);
+    border-color: rgba(255, 255, 255, 0.05);
+  }
+  
+  .input {
+    background: var(--background-card-dark);
+    border-color: #475569;
+    color: var(--foreground-dark);
+  }
+  
+  .input:focus {
+    border-color: var(--color-primary);
+  }
+}
+
+/* Utility classes per colori personalizzati */
+.bg-cyan-500 {
+  background-color: var(--color-cyan);
+}
+
+.bg-brown-500 {
+  background-color: var(--color-brown);
+}
+
+.bg-yellow-400 {
+  background-color: var(--color-yellow-light);
+}
+
+.text-cyan-500 {
+  color: var(--color-cyan);
+}
+
+.text-brown-500 {
+  color: var(--color-brown);
+}
+
+.text-yellow-400 {
+  color: var(--color-yellow-light);
+}
+
+/* Performance optimizations */
+* {
+  box-sizing: border-box;
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+}
+
+/* Reduce font loading impact */
+@font-display: swap;
+
+/* Smooth scrolling */
+html {
+  scroll-behavior: smooth;
+}
+
+/* Focus styles */
+*:focus {
+  outline: 2px solid #3B82F6;
+  outline-offset: 2px;
+}
+
+/* Typography enhancements */
+.font-desigual {
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+}
+
+.font-desigual-light {
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 400;
+  letter-spacing: 0.02em;
+}
+
+/* Custom logo sizes */
+.w-120 {
+  width: 30rem; /* 480px */
+}
+
+.h-120 {
+  height: 30rem; /* 480px */
+}
+
+/* Dissolvenza fluida - Nessuno scatto */
+@keyframes fade-in-out {
+  0% { 
+    opacity: 0; 
+  }
+  25% { 
+    opacity: 0.4; 
+  }
+  50% { 
+    opacity: 0.8; 
+  }
+  75% { 
+    opacity: 0.4; 
+  }
+  100% { 
+    opacity: 0; 
+  }
+}
+
+@keyframes fade-in-out-delayed {
+  0% { 
+    opacity: 0.3; 
+  }
+  33% { 
+    opacity: 0; 
+  }
+  66% { 
+    opacity: 0.6; 
+  }
+  100% { 
+    opacity: 0.3; 
+  }
+}
+
+.animate-fade-in-out {
+  animation: fade-in-out 10s ease-in-out infinite;
+  animation-delay: 0s;
+}
+
+.animate-fade-in-out-delayed {
+  animation: fade-in-out-delayed 10s ease-in-out infinite;
+  animation-delay: 3.3s;
+}
